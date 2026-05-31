@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rami GB - AI Strategy & Migration CV</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #627181;
+      --line: #d8e4e8;
+      --accent: #0f766e;
+      --accent-dark: #0b4f4a;
+      --blue: #2563eb;
+      --coral: #f9735b;
+      --gold: #d98b16;
+      --paper: #ffffff;
+      --soft: #f3f8f8;
+      --soft-blue: #eef4ff;
+      --sidebar: #102a43;
+      --sidebar-text: #f3fbfb;
+      --sidebar-muted: #c5d4da;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eaf7f5 0%, #f4f7fb 48%, #fff4ec 100%);
+      color: var(--ink);
+      font-family: "Aptos", "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.48;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 32px auto;
+      background: var(--paper);
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      box-shadow: 0 24px 70px rgba(16, 42, 67, 0.18);
+      min-height: 100vh;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    aside {
+      background: linear-gradient(160deg, #102a43 0%, #123d4c 48%, #0f766e 100%);
+      color: var(--sidebar-text);
+      padding: 34px 28px;
+    }
+
+    main {
+      padding: 40px 48px 44px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-family: "Aptos Display", "Segoe UI Variable Display", "Aptos", "Inter", "Segoe UI", sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    .role {
+      color: var(--accent-dark);
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 22px;
+      padding: 10px 14px;
+      background: linear-gradient(90deg, rgba(15, 118, 110, 0.13), rgba(37, 99, 235, 0.1));
+      border-left: 5px solid var(--coral);
+      border-radius: 6px;
+    }
+
+    .intro {
+      font-size: 16px;
+      color: #2f3e4d;
+      max-width: 720px;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      color: var(--accent-dark);
+      font-size: 15px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 7px;
+      margin: 28px 0 14px;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 58px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--blue), var(--coral));
+      border-radius: 999px;
+      margin-top: 7px;
+    }
+
+    h3 {
+      font-size: 17px;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 9px;
+      font-weight: 700;
+    }
+
+    .item {
+      margin-bottom: 20px;
+      break-inside: avoid;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .focus {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 4px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .focus li {
+      background: linear-gradient(135deg, var(--soft), var(--soft-blue));
+      border-left: 4px solid var(--accent);
+      padding: 11px 12px;
+      margin: 0;
+      font-weight: 700;
+      color: #263540;
+      border-radius: 6px;
+    }
+
+    .side-section {
+      margin-bottom: 28px;
+    }
+
+    aside h2 {
+      color: var(--sidebar-text);
+      border-bottom-color: rgba(255, 255, 255, 0.2);
+      margin-top: 0;
+    }
+
+    aside h2::after {
+      background: linear-gradient(90deg, #5eead4, #93c5fd, #fda4af);
+    }
+
+    aside p,
+    aside li {
+      color: var(--sidebar-muted);
+    }
+
+    .contact p {
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-list li {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 4px;
+      color: var(--sidebar-text);
+      padding: 5px 9px;
+      margin: 0;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .quote {
+      border-left: 4px solid #fbbf24;
+      padding-left: 14px;
+      color: var(--sidebar-text);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 26px;
+    }
+
+    .compact-list {
+      padding-left: 17px;
+    }
+
+    .compact-list li {
+      margin-bottom: 5px;
+    }
+
+    .url {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .personal-lab {
+      break-inside: avoid;
+    }
+
+    .experience-section {
+      break-inside: auto;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .skill-card {
+      background: linear-gradient(135deg, var(--soft), var(--soft-blue));
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 13px;
+      break-inside: avoid;
+    }
+
+    .skill-card h3 {
+      color: var(--accent-dark);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .skill-card p {
+      color: #31404d;
+      margin-bottom: 0;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        grid-template-columns: 1fr;
+        margin: 0;
+      }
+
+      main {
+        padding: 30px 24px;
+      }
+
+      aside {
+        padding: 28px 24px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .focus {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        font-size: 12px;
+      }
+
+      .page {
+        margin: 0;
+        max-width: none;
+        box-shadow: none;
+        grid-template-columns: 250px 1fr;
+        border-radius: 0;
+      }
+
+      aside {
+        padding: 24px 22px;
+      }
+
+      main {
+        padding: 28px 34px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      h2 {
+        margin-top: 20px;
+      }
+
+      .intro {
+        font-size: 13px;
+      }
+
+      .item {
+        margin-bottom: 14px;
+      }
+
+      .personal-lab {
+        break-before: page;
+        page-break-before: always;
+      }
+
+      .experience-section {
+        break-before: page;
+        page-break-before: always;
+      }
+
+      .skill-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside>
+      <section class="side-section">
+        <div class="quote">I help teams move from AI experiments to useful systems, better workflows, and real delivery change.</div>
+      </section>
+
+      <section class="side-section contact">
+        <h2>Contact</h2>
+        <p>Stockholm, Sweden</p>
+        <p>linkedin.com/in/ramigb</p>
+      </section>
+
+      <section class="side-section">
+        <h2>AI Focus</h2>
+        <ul class="compact-list">
+          <li>AI strategy</li>
+          <li>AI migration planning</li>
+          <li>Agentic automation</li>
+          <li>MCP tooling</li>
+          <li>Local-first AI assistants</li>
+          <li>AI-assisted software delivery</li>
+          <li>Developer workflow migration</li>
+          <li>AI Fika and team enablement</li>
+          <li>Tool evaluation and rollout</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2>Leadership</h2>
+        <ul class="compact-list">
+          <li>Technical leadership</li>
+          <li>Product strategy</li>
+          <li>Architecture direction</li>
+          <li>Cross-functional delivery</li>
+          <li>AI adoption enablement</li>
+          <li>Startup leadership</li>
+          <li>Demo-to-production thinking</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2>Technology</h2>
+        <ul class="tag-list">
+          <li>React</li>
+          <li>Next.js</li>
+          <li>JavaScript</li>
+          <li>TypeScript</li>
+          <li>GraphQL</li>
+          <li>SQLite</li>
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>AWS</li>
+          <li>ffmpeg</li>
+          <li>MCP</li>
+          <li>Mastra</li>
+          <li>LM Studio</li>
+          <li>llama.cpp</li>
+          <li>RAG</li>
+          <li>OpenRouter</li>
+          <li>Codex</li>
+          <li>Claude</li>
+          <li>Cursor</li>
+          <li>Tizen</li>
+          <li>webOS</li>
+          <li>Chromecast</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2>Languages</h2>
+        <p>Arabic (Native)</p>
+        <p>English (Near-native)</p>
+        <p>Swedish (Beginner)</p>
+      </section>
+    </aside>
+
+    <main>
+      <header>
+        <h1>Rami GB</h1>
+        <div class="role">AI Strategy & Migration Lead | Agentic AI Adoption | Technical Lead</div>
+        <p class="intro">Technical leader with nearly 20 years in software, product building, startups, and engineering delivery. I help teams turn AI from exciting experiments into practical systems, better workflows, and real delivery change.</p>
+      </header>
+
+      <section>
+        <h2>Profile</h2>
+        <p>Over the last three years, I have been hands-on with AI coding tools from early Copilot workflows through today's agentic development patterns. I genuinely love this space: the tools, the pace, the weird edges, and the moment when a team realizes AI can change how they think, build, test, and ship.</p>
+        <p>My strength is not only using AI tools, but helping teams understand how they change technical decision-making, delivery habits, product thinking, and migration paths. I bring hands-on engineering, product sense, startup experience, and commercial judgment into the same conversation.</p>
+        <ul class="focus">
+          <li>AI adoption that turns into daily team practice</li>
+          <li>Agentic development and developer automation</li>
+          <li>Modernization across web, TV, media, and API platforms</li>
+          <li>Business-to-technology translation for real delivery</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Selected AI Work</h2>
+        <ul>
+          <li>Started <strong>AI Fika</strong> at Leyra, a biweekly meetup for AI news, demos, team creations, practical how-tos, and better tool usage.</li>
+          <li>Created and maintained <code>#ai-news</code> channels at Leyra and Magine to make AI learning visible, shared, and part of the team's daily conversation.</li>
+          <li>Built AI-generated slide decks using my own <code>slide-in-mds</code> agent skill: github.com/ramigb/agent-skills/tree/main/slide-in-mds</li>
+          <li>Participated in Leyra's first post-merger hack days. In a team of seven, we built a "Lite" version of the full platform in less than two days using LLM-generated code across backend, web, Android, iOS, and Tizen MVP apps.</li>
+          <li>Co-led an AI-driven alternative back-office admin product at Magine between July and September 2025, using agentic coding techniques and demoing the result at IBC 2025.</li>
+          <li>Helped team members adopt agentic workflows and a mindset where AI becomes a practical engineering partner, not just a code-completion tool.</li>
+          <li>Use AI daily for knowledge distillation into Obsidian, code review, implementation support, workflow automation, and technical exploration.</li>
+        </ul>
+      </section>
+
+      <section class="personal-lab">
+        <h2>Personal AI Lab</h2>
+        <p>I keep a very active personal AI lab on GitHub. Some projects are experiments, some are prototypes, and some are intentionally unfinished, but together they show how I explore new ideas quickly and learn by building.</p>
+        <ul>
+          <li><strong>RetroMan:</strong> collaborative retrospectives platform for product development teams. <span class="url">https://github.com/ramigb/RetroMan</span></li>
+          <li><strong>Outpost:</strong> AI-first deployment harness that plans, provisions, deploys, and rolls back apps on infrastructure you control. <span class="url">https://github.com/ramigb/outpost</span></li>
+          <li><strong>Promachos:</strong> protocol for more consistent, trackable, and collaborative work between humans and AI agents. <span class="url">https://github.com/ramigb/promachos</span></li>
+          <li><strong>smolBro:</strong> local-first chat assistant and background agent with local models, SQLite-backed memory, scheduled jobs, MCP tool support, and opt-in CLI / remote escalation. <span class="url">https://github.com/ramigb/smolBro</span></li>
+          <li><strong>semantic_skeletonizer:</strong> Rust-based MCP server that builds and maintains an in-memory semantic graph of a TypeScript/React codebase. <span class="url">https://github.com/ramigb/semantic_skeletonizer</span></li>
+          <li><strong>HamadaBlog:</strong> autonomous AI writing experiment where an agent ran every hour, read its previous posts and reflection log, chose a topic, wrote 400-800 words, and published without human review before posting. <span class="url">https://github.com/ramigb/HamadaBlog</span></li>
+        </ul>
+        <p>I am constantly testing new models, agents, and techniques as they appear. I like benchmarks, but I trust hands-on testing more.</p>
+      </section>
+
+      <section>
+        <h2>Core Skills</h2>
+        <div class="skill-grid">
+          <article class="skill-card">
+            <h3>AI Strategy & Migration</h3>
+            <p>AI adoption strategy, migration planning, operating-model change, tool evaluation, practical rollout planning, executive-to-engineering translation.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Agentic Systems</h3>
+            <p>Agentic coding, human-AI workflows, MCP tooling, Mastra, agent protocols, local-first AI assistants, RAG, scheduled agents, memory-backed assistants, workflow automation.</p>
+          </article>
+          <article class="skill-card">
+            <h3>AI Engineering Tooling</h3>
+            <p>LLM-assisted development, prompt-driven development, RAG, semantic code analysis, code review automation, knowledge distillation, Mastra, LM Studio, llama.cpp, OpenRouter, Codex, Claude, Cursor, opencode.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Technical Leadership</h3>
+            <p>Product strategy, architecture direction, team enablement, cross-functional delivery, startup leadership, demo-to-production thinking.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Modern Engineering</h3>
+            <p>TypeScript, JavaScript, React, Next.js, Node.js, GraphQL, SQLite, AWS, ffmpeg, web and TV platforms, Tizen, webOS, Chromecast.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="experience-section">
+        <h2>Experience</h2>
+
+        <article class="item">
+          <h3>Leyra - Technical Lead</h3>
+          <div class="meta">March 2026 - Present | Stockholm</div>
+          <ul>
+            <li>Technical lead focused on web after the Magine x Accedo One merger into Leyra.</li>
+            <li>Working in a new post-merger context where the priority is to bring clarity, structure, and delivery focus to the web platform.</li>
+            <li>Current focus includes web delivery, platform direction, AI-assisted workflows, and applying modern engineering practices in a changing organization.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Magine Pro - Lead Engineer</h3>
+          <div class="meta">September 2020 - March 2026 | Stockholm</div>
+          <ul>
+            <li>Led engineering work on web and TV applications for media and streaming products.</li>
+            <li>Worked across React, GraphQL, Redux, styled-components, Tizen, webOS, and Chromecast.</li>
+            <li>Helped the team build and maintain products across a broad device ecosystem, balancing product requirements, technical constraints, and delivery quality.</li>
+            <li>Acted as a bridge between product direction and engineering execution, keeping decisions grounded in what users and teams actually needed.</li>
+            <li>Built strong experience in platform evolution, front-end modernization, and multi-device delivery. That is useful in AI migration work, where the hard part is often changing how teams build, test, and ship, not just adding another tool.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Magine Pro - Senior Frontend Developer</h3>
+          <div class="meta">February 2020 - September 2020 | Stockholm</div>
+          <ul>
+            <li>Built and improved web application experiences using modern front-end tools and delivery practices.</li>
+            <li>Contributed to a team environment focused on product quality, reliable implementation, and maintainable front-end architecture.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Cabonline Technologies - Frontend Developer</h3>
+          <div class="meta">August 2019 - February 2020 | Stockholm</div>
+          <ul>
+            <li>Built features for the web booking system used to book taxis in Sweden and Norway.</li>
+            <li>Integrated user-facing flows with backend APIs and device-specific behavior.</li>
+            <li>Worked on public websites and CMS-driven products using React, Next.js, MobX, styled-components, Gatsby, and Strapi.</li>
+            <li>Implemented a customer feedback system using Google Analytics and Google Data Studio, giving product and engineering teams more direct visibility into real customer feedback.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Gears of Leo - JavaScript Engineer</h3>
+          <div class="meta">April 2018 - July 2019 | Stockholm</div>
+          <ul>
+            <li>Built product features for a sportsbook platform with React, JavaScript, TypeScript, and supporting tooling.</li>
+            <li>Contributed across multiple projects, using both front-end and full-stack experience to support product delivery.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Schibsted Media Group - Software Engineer</h3>
+          <div class="meta">February 2017 - May 2017 | Stockholm</div>
+          <ul>
+            <li>Worked with the Aftonbladet WebTV team as a software engineer.</li>
+            <li>Contributed to media product development in a high-visibility publishing environment.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Schibsted Media Group - Tech Lead, SCM Ventures / Next Marketplaces</h3>
+          <div class="meta">September 2016 - February 2017 | Stockholm</div>
+          <ul>
+            <li>Worked in a venture-focused environment exploring new business verticals and startup opportunities.</li>
+            <li>Gained direct experience in the European startup ecosystem, rapid product exploration, and early-stage technical decision-making.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>HekSar.com - CTO / Co-founder</h3>
+          <div class="meta">October 2015 - September 2016 | Ramallah</div>
+          <ul>
+            <li>Built the product end to end, from backend through front end, as part of the founding team.</li>
+            <li>Worked across product, architecture, implementation, and delivery.</li>
+            <li>Used PHP, CodeIgniter, Node.js, Express, AngularJS, ffmpeg, and AWS services.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Self-Employed - Freelance Web Developer</h3>
+          <div class="meta">January 2007 - August 2016 | Ramallah / Amman</div>
+          <ul>
+            <li>Built internal and external web applications for different clients over a long freelance period.</li>
+            <li>Worked across PHP, CodeIgniter, Laravel, vanilla PHP, Ruby on Rails, Apache Flex, and CMS platforms including Joomla, Drupal, and WordPress.</li>
+            <li>Developed the practical ability to understand client needs, define workable solutions, and deliver without unnecessary complexity.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Seenlab - CEO / CTO / Founder</h3>
+          <div class="meta">December 2013 - January 2016 | Ramallah</div>
+          <ul>
+            <li>Founded and led an online education startup focused on high school certificate preparation in Palestine and easier access to online tutoring.</li>
+            <li>Managed a team of four while also building the software.</li>
+            <li>Combined product direction, technical execution, team leadership, and business ownership.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Earlier Experience</h3>
+          <div class="meta">2006 - 2014</div>
+          <ul>
+            <li>Senior Web Developer at Blue IT & Media Services, developing the company's internal PHP framework and engine.</li>
+            <li>Site development at Ikbis, working mainly on front-end features and selected backend features while learning Ruby on Rails.</li>
+            <li>IT Specialist and later Head of Eco Beach Division at Trace Group Est., managing operations and beach cleaning contracts including Emirates Palace.</li>
+          </ul>
+        </article>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
