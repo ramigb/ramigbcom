@@ -1,3 +1,11 @@
+# Epoptes
+link: https://github.com/ramigb/epoptes
+about: TypeScript harness for long-running Claude Code and Codex sessions, with fresh-context cycles, live steering, completion checks, and token reporting.
+
+# Progressive Decode
+link: https://github.com/ramigb/prog-decoding-research
+about: Model evaluation prototype exploring progressive quantized-weight refinement, with a documented negative result and a research gate that stopped further runtime development.
+
 # RetroMan
 link: https://github.com/ramigb/RetroMan
 about: Collaborative retrospectives platform for product development teams.
