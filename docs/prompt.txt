@@ -1,0 +1,1078 @@
+You are building my personal portfolio website.
+
+This is not a conventional portfolio site with a hero section, navbar, cards, and sections stacked vertically.
+
+The website itself is an interactive room.
+
+I have provided two visual references:
+
+1. `docs/mockup.png`
+   - This is the UX/art-direction reference.
+   - It shows roughly how interactive objects in the room map to areas of the site.
+   - Do NOT blindly reproduce every floating label/card from this mockup.
+   - Treat it as a concept diagram for the experience.
+
+2. `docs/room-background.png`
+   - This is the clean visual reference for the room itself.
+   - The final landing scene should stay extremely faithful to this image in composition, atmosphere, proportions, lighting, color palette, clutter, and mood.
+   - This image defines the visual identity of the site.
+
+Before writing code:
+- inspect both images carefully
+- inspect the existing repository
+- understand the current stack and conventions
+- do not replace working infrastructure unnecessarily
+- create a short implementation plan
+- then implement the experience incrementally
+
+==================================================
+CORE CONCEPT
+==================================================
+
+The landing page opens directly into this room.
+
+The room is the navigation system.
+
+There should NOT be a traditional visible navigation bar containing:
+
+About
+Projects
+Skills
+Hobbies
+Contact
+etc.
+
+Instead, major physical objects are interactive.
+
+The initial object mapping is:
+
+- LEFT COMPUTER / CRT / WORKSTATION
+  -> Portfolio / Projects
+
+- BED
+  -> Spare Time / Hobbies / Music / Gaming / personal interests
+
+- ARMCHAIR
+  -> About Me
+
+- RIGHT-SIDE SHELVES / TECH / EQUIPMENT
+  -> Skills / Tooling / Technologies
+
+- CITY / WINDOW
+  -> Contact / Vision / links
+
+- SMALL OBJECTS / DEVICES ON FLOOR
+  -> Experiments / Playground / side projects
+
+This mapping should be implemented as data/configuration rather than hard-coded separately throughout the application.
+
+For example, conceptually:
+
+const sceneAreas = [
+  {
+    id: "projects",
+    label: "Portfolio / Projects",
+    target: ...,
+    camera: ...,
+    content: ...
+  },
+  ...
+]
+
+==================================================
+MOST IMPORTANT DESIGN RULE
+==================================================
+
+THE ROOM MUST REMAIN THE MAIN CHARACTER.
+
+Do not turn this into:
+
+- a generic portfolio with cyberpunk styling
+- a dashboard
+- a collection of floating glass cards
+- a sci-fi HUD
+- a neon UI template
+- a WebGL tech demo
+- a game menu
+- a website with the reference image merely used as a background
+
+The UI should feel almost invisible until the user interacts with something.
+
+The image should dominate the viewport.
+
+Navigation should emerge from the environment.
+
+Think:
+
+"interactive cinematic space"
+
+rather than:
+
+"website placed on top of an illustration"
+
+==================================================
+VISUAL DIRECTION
+==================================================
+
+Use `references/room-background.png` as the canonical art direction.
+
+Important characteristics:
+
+- dark rainy futuristic city
+- enormous city opening/window
+- blue/teal atmospheric haze
+- warm amber/orange practical lights
+- burgundy/red bed
+- heavily patterned rug
+- worn chair
+- clutter
+- cables
+- technology
+- imperfect lived-in feeling
+- industrial framing
+- cozy but dystopian
+- cinematic rather than glossy
+- lots of visual detail
+- subtle filmic atmosphere
+
+Avoid excessively saturated cyberpunk neon.
+
+This room is not pristine.
+
+It should feel inhabited.
+
+Do not "clean up" the visual design.
+
+Do not make every UI element glow.
+
+==================================================
+IMPLEMENTATION APPROACH
+==================================================
+
+Use the existing stack if reasonable.
+
+If this is a new React project, prefer:
+
+- React
+- TypeScript
+- Vite
+- Three.js through @react-three/fiber
+- @react-three/drei where useful
+- GSAP OR a lightweight animation system for cinematic camera movement
+- regular DOM/CSS for readable content panels
+
+Do not introduce a huge dependency stack unnecessarily.
+
+Keep the architecture understandable.
+
+I care more about maintainability and the final interaction than showing off clever rendering techniques.
+
+==================================================
+2.5D / 3D STRATEGY
+==================================================
+
+We only have reference images, not actual 3D models of the room.
+
+Do NOT invent a completely different generic 3D bedroom.
+
+The visual match with the reference is more important than technically having every object represented by geometry.
+
+Use a hybrid / 2.5D approach initially.
+
+A good implementation would be:
+
+- place the reference environment inside a Three.js scene
+- use the clean background image as the primary visual plate
+- create invisible interaction geometry over the important objects
+- optionally separate certain foreground objects into layers if doing so materially improves parallax
+- add very subtle camera parallax from cursor/device movement
+- use an actual Three.js camera for navigation transitions
+- maintain perspective and depth illusion
+- allow later replacement of visual layers with proper GLTF geometry
+
+The architecture should NOT prevent us from eventually replacing parts with real 3D assets.
+
+Create scene-specific code separately from content/UI code.
+
+For example:
+
+src/
+  app/
+  scene/
+    RoomScene.tsx
+    CameraController.tsx
+    InteractionManager.tsx
+    SceneHotspot.tsx
+    sceneAreas.ts
+  sections/
+    Projects/
+    About/
+    Hobbies/
+    Skills/
+    Experiments/
+    Contact/
+  components/
+  styles/
+
+Exact structure can differ if the repository already has conventions.
+
+==================================================
+LANDING EXPERIENCE
+==================================================
+
+Desktop should initially occupy the full viewport:
+
+100vw
+100dvh
+
+No scrolling on the landing scene.
+
+The room fills the screen while preserving composition.
+
+The first view should closely resemble `room-background.png`.
+
+On initial load:
+
+- room fades in gently
+- optionally introduce a tiny camera drift/parallax
+- display minimal branding:
+  "Rami"
+  or
+  "Rami — Interactive Portfolio"
+
+Keep it subtle.
+
+A small instruction can appear once:
+
+"Explore the room"
+
+or:
+
+"Click an object to explore"
+
+Do not cover the environment with six giant labels immediately.
+
+The mockup image shows the information architecture, not necessarily the exact default UI.
+
+==================================================
+DISCOVERABILITY
+==================================================
+
+Interactive objects need to be discoverable without destroying immersion.
+
+Use subtle techniques such as:
+
+- slight highlight on hover
+- cursor change
+- tiny ambient outline
+- localized light/glow
+- small contextual label appearing near the object
+- very subtle hotspot
+- slight object-scale or lighting response
+
+Example:
+
+Hover the monitor:
+  monitor subtly brightens
+  small text appears:
+  "Portfolio / Projects"
+
+Hover the bed:
+  subtle warm highlight
+  "Spare Time / Hobbies"
+
+The effect should be restrained.
+
+Do not put six permanent giant floating cards across the screen.
+
+==================================================
+OBJECT INTERACTION
+==================================================
+
+When an object is activated:
+
+1. lock competing interactions
+2. smoothly move the camera toward the selected area
+3. subtly alter depth/parallax
+4. transition into the selected section
+5. reveal its content as something physically connected to the room
+
+The animation should feel deliberate and cinematic.
+
+Approximate transition duration:
+600–1000ms
+
+Use smooth easing, not linear movement.
+
+Avoid motion that causes nausea.
+
+==================================================
+PROJECTS / MONITOR EXPERIENCE
+==================================================
+
+The workstation monitor is one of the most important interactions.
+
+When clicked:
+
+- camera pans toward the left
+- camera moves closer to the monitor
+- monitor becomes the primary visual focus
+- the display transitions from ambient terminal graphics into my actual portfolio interface
+
+The portfolio should feel like it exists INSIDE the monitor.
+
+Do not simply open a centered modal over the whole webpage.
+
+Possible implementation:
+
+- use a Drei `<Html transform>` surface aligned approximately over the monitor
+- or transition from WebGL to a DOM layer carefully positioned over the monitor
+- perspective should visually match the screen
+- once zoomed enough, it is acceptable to subtly flatten/perspective-correct the interface for readability
+
+Portfolio content should eventually support:
+
+- project title
+- short description
+- technologies
+- screenshots
+- links
+- source links where applicable
+- navigation between projects
+
+Use placeholder content if actual project data is not yet present, but keep project data external/configurable.
+
+==================================================
+BED / HOBBIES EXPERIENCE
+==================================================
+
+Clicking the bed:
+
+- camera moves smoothly toward the bed
+- nearby environment remains visible
+- content appears contextually rather than as a generic website card
+
+This section represents personal interests.
+
+Potential categories:
+
+- music production
+- gaming
+- tinkering
+- experiments
+- creative work
+
+The implementation should allow rich media later.
+
+Do not populate it with invented autobiographical content.
+
+Use clearly marked placeholder data when needed.
+
+==================================================
+ARMCHAIR / ABOUT EXPERIENCE
+==================================================
+
+Clicking the armchair:
+
+- camera shifts into a more intimate framing of the chair
+- reveal the About section
+
+The mood should feel more personal and quiet than the Projects section.
+
+Allow eventual content such as:
+
+- short introduction
+- engineering background
+- leadership
+- building products
+- AI / agentic development
+- philosophy toward engineering
+
+Again: don't fabricate detailed biography.
+
+Build structure first.
+
+==================================================
+SHELVES / SKILLS EXPERIENCE
+==================================================
+
+Clicking shelves/equipment:
+
+- camera moves to the technology-filled area
+- tools and skills can appear as labels attached to objects, shelves or equipment
+- avoid a generic "skill percentage bars" design
+
+Good:
+TypeScript
+React
+Node
+AI tooling
+LLMs
+OTT/video
+Shaka
+Smart TVs
+etc.
+
+Bad:
+React 97%
+JavaScript 95%
+Leadership 93%
+
+The content model should be editable.
+
+==================================================
+CITY / CONTACT EXPERIENCE
+==================================================
+
+The city itself should be interactive.
+
+Clicking the skyline/window:
+
+- camera gently pushes toward the city
+- room falls slightly out of visual priority
+- contact information appears minimally over the skyline
+
+Eventually support:
+
+- email
+- GitHub
+- LinkedIn
+- CV
+- maybe a short statement / vision
+
+The city should remain visible.
+
+Do not replace the whole screen with a contact form unless there is a very strong visual reason.
+
+==================================================
+EXPERIMENTS / FLOOR OBJECTS
+==================================================
+
+One or more loose devices / objects near the rug can lead to:
+
+"Experiments / Playground"
+
+This is for:
+
+- prototypes
+- open source tools
+- unfinished work
+- odd ideas
+- demos
+- technical experiments
+
+This part can deliberately feel slightly more playful.
+
+==================================================
+RETURN NAVIGATION
+==================================================
+
+At any zoomed section:
+
+Escape:
+  returns to the room overview
+
+Browser Back:
+  returns to the room overview
+
+Optional small unobtrusive UI:
+
+[ ESC ] Back
+
+or simply:
+
+← Back
+
+Do not require clicking a tiny object to escape a section.
+
+==================================================
+URL / HISTORY STATE
+==================================================
+
+Interactions should integrate with browser history.
+
+Desired routes/state could be:
+
+/
+ /projects
+ /about
+ /hobbies
+ /skills
+ /experiments
+ /contact
+
+Directly loading `/projects` should:
+
+- load the room
+- start or settle at the Projects camera target
+- show Projects content
+
+Back button should behave naturally.
+
+Do not create broken or fake history behavior.
+
+==================================================
+CAMERA SYSTEM
+==================================================
+
+Create named camera states.
+
+Conceptually:
+
+overview
+projects
+about
+hobbies
+skills
+experiments
+contact
+
+Each should define something like:
+
+position
+target
+zoom/FOV
+optional UI alignment information
+
+Do not scatter camera coordinates throughout components.
+
+Centralize them.
+
+Example concept:
+
+cameraStates = {
+  overview: {...},
+  projects: {...},
+  hobbies: {...}
+}
+
+Use interpolation between states.
+
+Camera transitions must be interrupt-safe.
+
+Avoid allowing rapid clicking to corrupt camera state.
+
+==================================================
+RESPONSIVE DESIGN
+==================================================
+
+Desktop is the primary experience, but mobile must still work.
+
+Desktop:
+- full cinematic scene
+- precise object interaction
+- cursor hover
+- subtle mouse parallax
+
+Tablet:
+- same concept
+- larger hitboxes
+- less aggressive camera movement
+
+Mobile:
+- preserve visual identity
+- disable expensive or awkward effects if necessary
+- tap targets must be large enough
+- hotspot labels can be more explicit
+- interaction cannot depend on hover
+- use dvh correctly
+- safe area insets
+- no accidental page scrolling during room interaction
+
+If reproducing desktop composition exactly on a narrow portrait screen is impossible, preserve the illusion with intelligent crop/pan rather than shrinking everything until it is unreadable.
+
+==================================================
+ACCESSIBILITY
+==================================================
+
+This experience must remain usable despite being unconventional.
+
+Implement:
+
+- keyboard-accessible interactive regions
+- meaningful accessible labels
+- focus states that fit the art direction
+- Escape navigation
+- logical focus handling after transitions
+- reduced-motion support
+
+For:
+
+prefers-reduced-motion: reduce
+
+Camera movements should become near-instant fades or much smaller transitions.
+
+Do not make accessibility depend on navigating Three.js objects with a mouse.
+
+Provide a semantic hidden/alternate navigation structure where required.
+
+==================================================
+PERFORMANCE
+==================================================
+
+Performance is important.
+
+Targets:
+
+- good experience on modern laptops
+- acceptable integrated GPU performance
+- avoid needless permanent render loops
+- preload important assets
+- defer secondary content
+- optimize textures
+- use correct DPR limits
+- avoid enormous uncompressed textures
+- avoid excessive post-processing
+- avoid particles just because this is "cyberpunk"
+
+Use adaptive DPR where appropriate.
+
+Do not render at devicePixelRatio 3 or 4 unnecessarily.
+
+Cap something like:
+
+Math.min(window.devicePixelRatio, 2)
+
+or lower if testing shows that is preferable.
+
+Respect mobile devices.
+
+==================================================
+IMAGE HANDLING
+==================================================
+
+Keep original source art untouched.
+
+Create optimized derivatives for the web.
+
+Prefer appropriate formats such as:
+
+AVIF
+WebP
+
+Maintain a fallback if needed.
+
+Do not repeatedly recompress source references.
+
+If using the background as a GPU texture:
+
+- choose dimensions carefully
+- preserve enough detail for zoom transitions
+- avoid loading an absurdly large texture on mobile
+
+Implement responsive asset selection if useful.
+
+==================================================
+DEPTH / PARALLAX
+==================================================
+
+Add depth carefully.
+
+Potential layers:
+
+- foreground chair
+- floor/rug
+- bed
+- workstation
+- room frame
+- city
+- distant atmosphere
+
+If assets cannot be convincingly separated automatically, do NOT create ugly cutouts.
+
+A subtle camera transformation over the original composition is preferable to visibly broken image segmentation.
+
+Quality > technical novelty.
+
+==================================================
+AMBIENT MOTION
+==================================================
+
+Subtle ambient motion is welcome.
+
+Examples:
+
+- city light flicker
+- monitor glow
+- extremely subtle atmospheric rain
+- slight distant haze movement
+- tiny camera drift
+- occasional equipment LED pulse
+
+Keep this restrained.
+
+The scene should still work beautifully when stationary.
+
+No cheesy Matrix rain.
+
+No giant particles flying toward the camera.
+
+==================================================
+CURSOR / POINTER
+==================================================
+
+A custom cursor is optional.
+
+If implemented:
+
+normal:
+small understated dot
+
+interactive object:
+slightly larger ring / indicator
+
+Do not replace the cursor with an obnoxious giant blob.
+
+==================================================
+AUDIO
+==================================================
+
+Do NOT autoplay audio.
+
+Architecture may allow ambient sound later:
+
+- distant rain
+- city ambience
+- electrical hum
+
+But audio must require explicit user activation.
+
+Do not implement sound as a prerequisite for this iteration unless the repository already has a sound system.
+
+==================================================
+LOADING
+==================================================
+
+Avoid a generic percentage loader if possible.
+
+If loading time is meaningful, use something fitting the environment such as:
+
+SYSTEM INITIALIZING
+or
+CONNECTING...
+
+but keep it understated.
+
+If assets load quickly, prefer a simple fade.
+
+==================================================
+CONTENT ARCHITECTURE
+==================================================
+
+Separate visual scene mechanics from actual portfolio data.
+
+Create data structures/files for:
+
+projects
+skills
+links
+hobbies
+experiments
+
+Avoid embedding content directly inside rendering logic.
+
+Example:
+
+src/content/projects.ts
+src/content/skills.ts
+etc.
+
+This allows me to replace content later without touching the scene.
+
+==================================================
+STATE ARCHITECTURE
+==================================================
+
+Keep state simple.
+
+Something like:
+
+activeArea:
+  null
+  "projects"
+  "about"
+  "hobbies"
+  "skills"
+  "experiments"
+  "contact"
+
+transitioning:
+  boolean
+
+Avoid adding Redux unless the existing application already uses it.
+
+React state/context or a tiny state store is enough.
+
+==================================================
+VISUAL UI LANGUAGE
+==================================================
+
+When UI overlays are necessary:
+
+- dark translucent surfaces
+- subtle backdrop blur
+- fine borders
+- restrained typography
+- muted cyan/blue accents
+- warm accents where the environment already has them
+- small amount of glow
+- strong readability
+
+Avoid excessive:
+- gradients
+- neon borders
+- rounded SaaS cards
+- pill buttons
+- generic Tailwind dashboard aesthetics
+
+Typography should feel modern and technical without looking like a movie prop.
+
+Prefer a clean grotesk / sans font.
+
+Monospace can be used sparingly for secondary metadata.
+
+==================================================
+ANIMATION PHILOSOPHY
+==================================================
+
+Animations should communicate spatial movement.
+
+Good:
+
+the viewer moves toward the computer because they selected Projects.
+
+Bad:
+
+a projects panel slides in from the right because every website does that.
+
+Whenever possible, transitions should make physical sense within the room.
+
+==================================================
+DEVELOPMENT ORDER
+==================================================
+
+Implement this in phases.
+
+PHASE 1
+- render room accurately
+- full-screen responsive layout
+- establish Three.js scene
+- camera setup
+- resize behavior
+- image fidelity
+
+PHASE 2
+- define interaction areas
+- hover/focus states
+- labels
+- cursor behavior
+- keyboard support
+
+PHASE 3
+- camera state system
+- click transitions
+- Escape behavior
+- browser history
+- deep linking
+
+PHASE 4
+- implement Projects monitor experience
+- make monitor content readable
+- placeholder project data
+
+PHASE 5
+- implement About
+- Hobbies
+- Skills
+- Experiments
+- Contact
+
+PHASE 6
+- mobile behavior
+- accessibility
+- reduced motion
+- performance tuning
+- asset optimization
+
+PHASE 7
+- polish
+- subtle ambient effects
+- visual QA against the supplied references
+
+Do not try to build all sections simultaneously before the core room navigation feels correct.
+
+==================================================
+TESTING
+==================================================
+
+Test at minimum:
+
+1920x1080
+1440x900
+1366x768
+1024x768
+390x844
+375x667
+
+Check:
+
+- image composition
+- hit target alignment
+- camera positioning
+- content readability
+- browser Back
+- Escape
+- keyboard navigation
+- mobile tapping
+- rotation/resizing
+- reduced motion
+- route loading
+- rapid repeated clicking
+
+Hit regions must remain aligned after resize.
+
+==================================================
+VISUAL QA
+==================================================
+
+Frequently compare the implementation against:
+
+`references/room-background.png`
+
+The overview state should immediately remind the viewer of that image.
+
+Do not allow implementation convenience to slowly turn the room into something visually unrelated.
+
+The reference image is the source of truth for:
+
+- camera angle
+- major object positioning
+- palette
+- density
+- atmosphere
+- visual hierarchy
+
+`references/mockup.png` is the source of truth for:
+
+- object-to-section mapping
+- general interaction concept
+
+==================================================
+DO NOT DO THESE
+==================================================
+
+Do NOT:
+
+- create a normal navbar
+- make a scrolling portfolio homepage
+- add giant hero copy over the city
+- cover the room with cards
+- recreate every mockup annotation permanently
+- use generic cyberpunk UI kits
+- introduce unnecessary 3D objects that hurt the reference match
+- generate fake personal information
+- add skill percentage bars
+- autoplay audio
+- autoplay a long intro animation every visit
+- make users wait through a splash screen
+- make navigation depend solely on hover
+- sacrifice readability for perspective
+- sacrifice performance for effects
+
+==================================================
+DESIRED FEELING
+==================================================
+
+When someone opens the site, I want approximately this reaction:
+
+"What the hell is this place?"
+
+Then:
+
+"Oh — the room IS the website."
+
+Then they naturally start clicking objects.
+
+The interaction should reward curiosity.
+
+The site should feel personal, strange, technical, atmospheric and handcrafted rather than corporate.
+
+==================================================
+FIRST IMPLEMENTATION GOAL
+==================================================
+
+Do NOT begin by filling every section with content.
+
+The first meaningful milestone is:
+
+1. The room fills the viewport and visually matches the reference.
+2. The major objects are correctly identified.
+3. Hovering/focusing them gives subtle feedback.
+4. Clicking the workstation smoothly moves the camera toward it.
+5. A basic Projects interface appears integrated into the monitor.
+6. Escape returns beautifully to the original room composition.
+7. Browser Back does the same thing.
+8. The architecture makes adding the remaining object interactions straightforward.
+
+Once this vertical slice is polished and working, continue with the rest.
+
+==================================================
+ENGINEERING EXPECTATIONS
+==================================================
+
+Use strict TypeScript.
+
+Avoid `any` unless genuinely unavoidable.
+
+Prefer small composable components.
+
+Avoid premature abstraction, but centralize:
+
+- camera states
+- interaction definitions
+- content data
+- routes
+- scene configuration
+
+Comment unusual Three.js/math code where intent isn't obvious.
+
+Do not comment obvious React code.
+
+Keep animation side effects cleaned up.
+
+Dispose WebGL resources correctly where necessary.
+
+Avoid memory leaks from event listeners.
+
+Respect React StrictMode.
+
+Run:
+
+- typecheck
+- lint
+- tests if present
+- production build
+
+Fix issues rather than suppressing them.
+
+==================================================
+IMPORTANT: TAKE OWNERSHIP
+==================================================
+
+You have access to the repository.
+
+Do not stop after creating a skeleton and tell me what remains.
+
+Inspect the project, make the implementation, run it, inspect errors, fix them, and iterate.
+
+Use browser/computer tools if available to visually inspect the result.
+
+Compare the running implementation to the reference images.
+
+If something looks materially wrong, fix it.
+
+If a technical decision becomes incompatible with the visual concept, change the implementation rather than changing the concept.
+
+Do not redesign the site into something easier to code.
+
+The room is the site.

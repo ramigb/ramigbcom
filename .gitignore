@@ -1,0 +1,6 @@
+node_modules
+dist
+*.local
+scripts/out
+qa-screens
+*.zip

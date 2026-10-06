@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rami GB</title>
+    <script>
+      // GitHub Pages has no SPA rewrites. Send deep links (/projects, ...) to the app,
+      // which restores the original path from ?p= before rendering.
+      var l = window.location
+      l.replace('/?p=' + encodeURIComponent(l.pathname + l.search + l.hash))
+    </script>
+  </head>
+  <body></body>
+</html>
